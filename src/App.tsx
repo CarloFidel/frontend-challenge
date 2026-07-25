@@ -5,8 +5,10 @@ function App() {
 
   return (
     <div className="justify-center items-center flex flex-col min-h-screen bg-background text-white">
-      <p>Hello Vite + React!</p>
-      <button onClick={() => setCount(count + 1)}>Count is: {count}</button>
+      <p className="text-text-muted text-display">Hello Vite + React!</p>
+      <button className="bg-surface-selected text-white hover:bg-primary-hover focus:ring focus:ring-blue-500" onClick={() => setCount(count + 1)}>
+        Count is: {count}
+      </button>
     </div>
   );
 }
