@@ -5,6 +5,7 @@
   --font-sans: "Inter", sans-serif;
 
   --color-background: #061325;
+  --color-background-secondary: #0e1d33;
 
   --color-surface: #0f2747;
   --color-surface-secondary: #16345d;
@@ -36,8 +37,8 @@
   --shadow-card: 0 4px 24px rgb(0 0 0 / 0.18);
 
   --text-display: 4rem;
-  --text-h1: 2rem;
-  --text-h2: 1.5rem;
+  --text-h1: 1.5rem;
+  --text-h2: 1.25rem;
   --text-body: 1rem;
   --text-caption: 0.875rem;
 }

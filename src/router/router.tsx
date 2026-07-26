@@ -20,11 +20,11 @@ export const router = createBrowserRouter([
         element: <WorldMap />,
       },
       {
-        path: "/favorits",
+        path: "/favorites",
         element: <Favorites />,
       },
       {
-        path: "/alert",
+        path: "/alerts",
         element: <Alerts />,
       },
       {
