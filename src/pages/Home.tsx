@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   EyeOpenIcon,
   GearIcon,
@@ -6,25 +8,72 @@ import {
   StarIcon,
   SunIcon,
 } from "@radix-ui/react-icons";
-import AtmosParams from "../modules/favorites_cities/components/AtmosParams";
+
 import { WiStrongWind } from "weather-icons-react";
-import ViewParams from "../modules/favorites_cities/components/ViewParams";
-import SearchBar from "../modules/favorites_cities/components/SearchBar";
+
+import AtmosParams from "../modules/search_by_city/components/AtmosParams";
+import ViewParams from "../modules/search_by_city/components/ViewParams";
+import SearchBar from "../modules/search_by_city/components/SearchBar";
 import { getToDayDate } from "../utility/getToDay";
-import { useState } from "react";
+import { getLatLongWeather } from "../service/searchCity.service";
+import { getWeatherForecast } from "../service/getWeather.service";
 
 function Home() {
   const [toDay] = useState(getToDayDate());
-  
+  const [notCityFound, setCityNotFound] = useState(false);
+
+  const handleSearch = async (query: string) => {
+    query = query.trim().toLowerCase();
+
+    if (query.length === 0) return;
+
+    try {
+      const dataWeather = await getLatLongWeather(query);
+
+      if (!dataWeather?.results?.length) {
+        setCityNotFound(true);
+        return;
+      }
+
+      setCityNotFound(false);
+
+      const lat = dataWeather.results[0]?.latitude;
+      const long = dataWeather.results[0]?.longitude;
+
+      const paramsWeather = await getWeatherForecast(lat, long)
+
+      console.log(paramsWeather);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (notCityFound) {
+    return (
+      <div className="flex h-full flex-col">
+        <section className="flex w-full justify-between">
+          <SearchBar onQuery={handleSearch} />
+          <div className="flex gap-4 justify-center items-center">
+            <SunIcon width={20} height={20} />
+            <GearIcon width={20} height={20} />
+          </div>
+        </section>
+        <h1 className="mt-10">No se encontró ninguna ciudad</h1>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-full flex-col">
       <section className="flex w-full justify-between">
-        <SearchBar />
+        <SearchBar onQuery={handleSearch} />
         <div className="flex gap-4 justify-center items-center">
           <SunIcon width={20} height={20} />
           <GearIcon width={20} height={20} />
         </div>
       </section>
+
       <section className="flex flex-1 gap-4 mt-10 items-stretch min-h-0">
         <article className="flex flex-col items-start w-1/2 h-full justify-between ">
           <div className="flex justify-start gap-10 items-start w-full">
