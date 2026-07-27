@@ -14,7 +14,7 @@ const SideBar = () => {
 
   const { menuItem, handleItemClick } = useCustomNavigation();
   return (
-    <section className="flex flex-col justify-between items-center py-10 px-5 border border-border-subtle rounded-3xl w-1/6 bg-background-secondary">
+    <nav className="flex flex-col justify-between items-center py-10 px-5 border border-border-subtle rounded-3xl w-1/6 bg-background-secondary">
       <div className="w-full">
         <h2 className=" flex items-center justify-start gap-3 text-h2 ">
           <img
@@ -102,7 +102,7 @@ const SideBar = () => {
           <p className="text-amber-400 text-sm">Premium</p>
         </div>
       </div>
-    </section>
+    </nav>
   );
 };
 

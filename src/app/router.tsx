@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { RootLayout } from "../layout/RootLayout";
+import { RootLayout } from "./RootLayout";
 import Home from "../pages/Home";
 import WorldMap from "../pages/WorldMap";
 import Favorites from "../pages/Favorites";
