@@ -1,7 +1,6 @@
 import {
   EyeOpenIcon,
   GearIcon,
-  MagnifyingGlassIcon,
   OpacityIcon,
   RadiobuttonIcon,
   StarIcon,
@@ -10,28 +9,24 @@ import {
 import AtmosParams from "../modules/favorites_cities/components/AtmosParams";
 import { WiStrongWind } from "weather-icons-react";
 import ViewParams from "../modules/favorites_cities/components/ViewParams";
+import SearchBar from "../modules/favorites_cities/components/SearchBar";
+import { getToDayDate } from "../utility/getToDay";
+import { useState } from "react";
+
 function Home() {
+  const [toDay] = useState(getToDayDate());
+  
   return (
     <div className="flex h-full flex-col">
-      <section className="flex w-full justify-between bg">
-        <div className="flex gap-4 relative justify-start w-full">
-          <input
-            className="border border-gray-200 px-10 py-2.5 w-md rounded-2xl focus:outline-none "
-            placeholder="Search for a city or country"
-          ></input>
-          <MagnifyingGlassIcon
-            className="absolute top-3.5 left-4 text-gray-200"
-            width={20}
-            height={20}
-          />
-        </div>
+      <section className="flex w-full justify-between">
+        <SearchBar />
         <div className="flex gap-4 justify-center items-center">
           <SunIcon width={20} height={20} />
           <GearIcon width={20} height={20} />
         </div>
       </section>
       <section className="flex flex-1 gap-4 mt-10 items-stretch min-h-0">
-        <article className="flex flex-col items-start w-1/2 h-full justify-between">
+        <article className="flex flex-col items-start w-1/2 h-full justify-between ">
           <div className="flex justify-start gap-10 items-start w-full">
             <div className="flex flex-col">
               <div className="flex flex-col justify-start">
@@ -40,10 +35,13 @@ function Home() {
                   <StarIcon
                     width={20}
                     height={20}
-                    className="text-yellow-400 mt-1"
+                    className="text-yellow-400 mt-1 cursor-pointer"
+                    onClick={() => {
+                      console.log("clicked");
+                    }}
                   />
                 </div>
-                <p>Wednasday, May 29 - 09:41 AM</p>
+                <p>{toDay}</p>
               </div>
               <div className="flex justify-start items-start">
                 <p className="text-display">12</p>
@@ -54,7 +52,7 @@ function Home() {
                 <p>Feels like 12°C</p>
               </div>
             </div>
-            <div className="bg-background-secondary/5 backdrop-blur-xs rounded-3xl px-8 py-2">
+            <div className="bg-gray-200/10 backdrop-blur-xs rounded-3xl px-8 py-2">
               <h2>Now</h2>
               <img
                 src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png"
@@ -72,16 +70,16 @@ function Home() {
               iconPlus
             />
             <AtmosParams
-              value={16}
+              value={58}
               param="Humidity"
               messuereUnity="%"
               iconParam={<OpacityIcon />}
               iconPlus
             />
             <AtmosParams
-              value={16}
+              value={1013}
               param="Preassure"
-              messuereUnity="km/h"
+              messuereUnity="hPa"
               iconParam={<RadiobuttonIcon />}
             />
           </div>

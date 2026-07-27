@@ -16,11 +16,11 @@ const AtmosParams = ({
   iconPlus,
 }: Props) => {
   return (
-    <div className="flex flex-col gap-2 justify-center items-start rounded-2xl bg-background-secondary/10 backdrop-blur-xs py-2 pl-4 pr-10 text-xs">
+    <div className="flex flex-col gap-2 justify-center items-start rounded-2xl bg-gray-200/10 backdrop-blur-xs py-2 pl-4 pr-10 text-xs">
       <div className="flex gap-2 justify-start items-center">
         {iconParam}
         <p>
-          {value} {param} {messuereUnity}
+          {value} {messuereUnity}
         </p>
       </div>
       <div className="flex gap-2 justify-start items-center">
