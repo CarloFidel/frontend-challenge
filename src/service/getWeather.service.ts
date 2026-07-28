@@ -12,7 +12,6 @@ export const getWeatherForecast = async (
   latitud: number,
   longitud: number,
 ): Promise<ForecastMeteoResponse> => {
-  console.log(latitud, longitud);
 
   const { data } = await forecastMeteoUrl.get("/forecast", {
     params: {
