@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import {
   EyeOpenIcon,
   GearIcon,
@@ -24,10 +24,15 @@ import CustomError from "../common/components/CustomError";
 import { hourTransform } from "../utility/DateFormat";
 import { getUvDescription } from "../infrastructure/mapper/uv_index.mapper";
 import { getWeatherIcon } from "../infrastructure/mapper/weatherCode.icons.mapper";
+import { TempUnityContext } from "../modules/search_by_city/context/TempUnityContext";
+import { convertToFahrenheit } from "../utility/convertToFahrenheit";
 
 function Home() {
   const [toDay] = useState(getToDayDate());
   const [cityName, setCityName] = useState<string>("Madrid");
+
+  const farenheitContext = use(TempUnityContext);
+  const { isFarenheit } = farenheitContext!;
 
   const handleSearch = async (query: string) => {
     query = query.trim();
@@ -97,9 +102,13 @@ function Home() {
                 </div>
                 <div className="flex justify-start items-start">
                   <p className="text-display">
-                    {weatherData?.current?.temperature_2m}
+                    {isFarenheit
+                      ? convertToFahrenheit(
+                          weatherData?.current?.temperature_2m,
+                        )
+                      : weatherData?.current?.temperature_2m}
                   </p>
-                  <p className="mt-10">°C</p>
+                  <p className="mt-10">{isFarenheit ? "°F" : "°C"}</p>
                 </div>
                 <div className="flex flex-col justify-start">
                   <p>
@@ -108,14 +117,22 @@ function Home() {
                       : "--"}
                   </p>
                   <p>
-                    {" "}
-                    {`Fles like ${weatherData?.current.apparent_temperature}`}
+                    {`Fles like ${
+                      isFarenheit
+                        ? convertToFahrenheit(
+                            weatherData?.current?.temperature_2m,
+                          )
+                        : weatherData?.current?.temperature_2m
+                    }`}
                   </p>
                 </div>
               </div>
               <div className="bg-gray-200/10 backdrop-blur-xs rounded-3xl px-8 py-2">
                 <h2>Now</h2>
-                {getWeatherIcon(weatherData.current.weather_code, weatherData.current.isDay)}
+                {getWeatherIcon(
+                  weatherData.current.weather_code,
+                  weatherData.current.isDay,
+                )}
               </div>
             </div>
             <div className="flex w-full gap-2">

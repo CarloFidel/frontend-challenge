@@ -6,11 +6,15 @@ import {
   StarIcon,
 } from "@radix-ui/react-icons";
 import { useCustomNavigation } from "../hook/useCustomNavigation";
-import { useState } from "react";
+import { use } from "react";
 import { userPhoto } from "../../data/user.mock";
+import { TempUnityContext } from "../../modules/search_by_city/context/TempUnityContext";
 
 const SideBar = () => {
-  const [isC, setIsC] = useState<boolean>(true);
+
+    const farenheitContext = use(TempUnityContext);
+    const {isFarenheit, setIsFarenheit} = farenheitContext!
+  
 
   const { menuItem, handleItemClick } = useCustomNavigation();
   return (
@@ -75,17 +79,17 @@ const SideBar = () => {
       </div>
       <div className="flex">
         <button
-          className={`border border-border-subtle px-8 py-1 rounded-l-md cursor-pointer ${isC ? "bg-base-900" : "bg-none"}`}
+          className={`border border-border-subtle px-8 py-1 rounded-l-md cursor-pointer ${!isFarenheit ? "bg-base-900" : "bg-none"}`}
           onClick={() => {
-            setIsC(true);
+            setIsFarenheit(false);
           }}
         >
           ºC
         </button>
         <button
-          className={`border border-border-subtle px-8 py-1 rounded-r-md cursor-pointer ${!isC ? "bg-base-900" : "bg-none"}`}
+          className={`border border-border-subtle px-8 py-1 rounded-r-md cursor-pointer ${isFarenheit ? "bg-base-900" : "bg-none"}`}
           onClick={() => {
-            setIsC(false);
+            setIsFarenheit(true);
           }}
         >
           ºF
