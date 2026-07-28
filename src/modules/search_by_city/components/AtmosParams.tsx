@@ -3,7 +3,7 @@ import { PlusIcon } from "@radix-ui/react-icons";
 interface Props {
   iconParam: React.ReactNode;
   iconPlus?: boolean;
-  value: number;
+  value: number | undefined;
   param: string;
   messuereUnity: string;
 }
