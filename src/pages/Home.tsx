@@ -21,11 +21,12 @@ import ViewParams from "../modules/search_by_city/components/ViewParams";
 import SearchBar from "../modules/search_by_city/components/SearchBar";
 import Loading from "../common/components/Loading";
 import CustomError from "../common/components/CustomError";
-import { formatForecastDate, hourTransform } from "../utility/DateFormat";
 import { getUvDescription } from "../infrastructure/mapper/uv_index.mapper";
 import { getWeatherIcon } from "../infrastructure/mapper/weatherCode.icons.mapper";
 import { TempUnityContext } from "../modules/search_by_city/context/TempUnityContext";
 import { convertToFahrenheit } from "../utility/convertToFahrenheit";
+import Forecast from "../modules/weather_forecast/components/Forecast";
+import { hourTransform } from "../utility/DateFormat";
 
 function Home() {
   const [toDay] = useState(getToDayDate());
@@ -64,8 +65,6 @@ function Home() {
       tempMin: weatherData.daily.temperature_2m_min[index],
       weatherCode: weatherData.daily.weather_code[index],
     })) ?? [];
-
-  console.log(dailyForecast);
 
   return (
     <div className="flex h-full flex-col">
@@ -198,71 +197,10 @@ function Home() {
               />
             </div>
           </article>
-          <article className="flex justify-center items-center w-1/2 text-caption text-gray-300">
-            <div className="bg-background-secondary/40 border border-border-subtle backdrop-blur-xl w-full py-2">
-              <div className="flex justify-between border-b border-b-border-subtle/40 px-4 pb-2">
-                <h2>Hourly forecast</h2>
-                <p className="text-xs cursor-pointer">View more</p>
-              </div>
-              <div className="flex gap-8 overflow-x-auto mt-5 px-4">
-                {hourlyForecast.map((hour) => (
-                  <div
-                    key={hour.time}
-                    className="flex flex-col items-center justify-between"
-                  >
-                    <span>{hourTransform(hour.time)}</span>
-                    {getWeatherIcon(Number(hour.weatherCode), hour.isDay, 25)}
-                    {isFarenheit
-                      ? convertToFahrenheit(hour.temperature)
-                      : hour.temperature}
-                    °
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col overflow-hidden h-full gap-8 overflow-x-auto mt-5 px-4">
-                <div className="flex justify-start border-y border-y-border-subtle/40 pb-2">
-                  <h2>Dayly forecast</h2>
-                </div>
-
-                {dailyForecast.map((day) => (
-                  <div
-                    key={day.date}
-                    className="grid grid-cols-[1fr_1fr_1fr_1fr] items-center overflow-scroll w-full"
-                  >
-                    <span className="text-xs justify-start items-center ">
-                      {formatForecastDate(day.date).weekday}
-                    </span>
-
-                    <span className="text-xs text-gray-400 justify-start items-start">
-                      {formatForecastDate(day.date).month}{" "}
-                      {formatForecastDate(day.date).day}
-                    </span>
-
-                    {getWeatherIcon(day.weatherCode, true, 20)}
-
-                    <div className="flex gap-4 justify-center items-center">
-                      <span>
-                        {isFarenheit
-                          ? convertToFahrenheit(day.tempMin)
-                          : day.tempMin}
-                        °
-                      </span>
-
-                      <span className="text-gray-400 justify-center items-center ">
-                        {isFarenheit
-                          ? convertToFahrenheit(day.tempMax)
-                          : day.tempMax}
-                        °
-                      </span>
-                    </div>
-                  </div>
-                ))}
-                <div className="flex gap-2">
-                  <button>Previous</button>
-                </div>
-              </div>
-            </div>
-          </article>
+          <Forecast
+            dailyForecast={dailyForecast}
+            hourlyForecast={hourlyForecast}
+          />
         </section>
       )}
     </div>

@@ -26,4 +26,6 @@ export const TIMEZONE = "Europe/London";
 
 export const TEMPERATURE_UNIT = "celsius";
 
- export const FORECAST_DAYS = 16
+export const FORECAST_DAYS = 16
+
+
