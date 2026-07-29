@@ -49,6 +49,16 @@ function Home() {
   );
   const weatherData = weatherQuery.data;
 
+  const hourlyForecast =
+    weatherData?.hourly.time.slice(0, 24).map((time, index) => ({
+      time,
+      temperature: weatherData.hourly.temperature_2m[index],
+      weatherCode: weatherData.hourly.weather_code[index],
+      isDay: weatherData.hourly.is_day[index] === 1,
+    })) ?? [];
+
+  console.log(hourlyForecast);
+
   return (
     <div className="flex h-full flex-col">
       <section className="flex w-full justify-between">
@@ -165,7 +175,7 @@ function Home() {
               />
               <ViewParams
                 param="Visibility"
-                value={weatherData?.hourly.visibility[0]}
+                value={weatherData?.current.visibility}
                 iconParam={<EyeOpenIcon width={25} height={25} />}
               />
               <ViewParams
@@ -180,8 +190,32 @@ function Home() {
               />
             </div>
           </article>
-          <article className="flex justify-center items-center w-1/2">
-            <p>Article 2</p>
+          <article className="flex justify-center items-center w-1/2 text-caption text-gray-300">
+            <div className="bg-background-secondary/40 border border-border-subtle backdrop-blur-xl w-full py-2">
+              <div className="flex justify-between border-b border-b-border-subtle/40 px-4 pb-2">
+                <h2>Hourly forecast</h2>
+                <p className="text-xs cursor-pointer">View more</p>
+              </div>
+              <div className="flex gap-8 overflow-x-auto mt-5 px-4">
+                {hourlyForecast.map((hour) => (
+                  <div
+                    key={hour.time}
+                    className="flex flex-col items-center justify-between"
+                  >
+                    <span>{hourTransform(hour.time)}</span>
+                    {getWeatherIcon(
+                      Number(hour.weatherCode),
+                      hour.isDay,
+                      25,
+                    )}
+                    {isFarenheit
+                      ? convertToFahrenheit(hour.temperature)
+                      : hour.temperature}
+                    °
+                  </div>
+                ))}
+              </div>
+            </div>
           </article>
         </section>
       )}

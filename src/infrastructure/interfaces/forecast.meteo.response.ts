@@ -20,14 +20,14 @@ export interface ForecastMeteoResponse {
 export interface Current {
   time: string;
   interval: number;
-
+  visibility: number;
   temperature_2m: number;
   apparent_temperature: number;
   relative_humidity_2m: number;
   wind_speed_10m: number;
   weather_code: number;
   surface_pressure: number;
-  isDay: boolean
+  isDay: boolean;
 }
 
 export interface CurrentUnits {
@@ -44,10 +44,9 @@ export interface CurrentUnits {
 
 export interface Hourly {
   time: string[];
-
-  surface_pressure: number[];
-  visibility: number[];
-  wind_speed_10m: number[];
+  weather_code: string[];
+  temperature_2m: number[];
+  is_day: number[];
 }
 
 export interface HourlyUnits {

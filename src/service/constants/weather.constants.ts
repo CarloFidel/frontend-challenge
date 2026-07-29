@@ -6,14 +6,15 @@ export const CURRENT_PARAMS = [
   "weather_code",
   "surface_pressure",
   "is_day",
+  "visibility",
 ].join(",");
 
 export const DAILY_PARAMS = ["sunrise", "sunset", "uv_index_max"].join(",");
 
 export const HOURLY_PARAMS = [
-  "surface_pressure",
-  "visibility",
-  "wind_speed_10m",
+  "temperature_2m",
+  "weather_code",
+   "is_day"
 ].join(",");
 
 export const TIMEZONE = "Europe/London";
