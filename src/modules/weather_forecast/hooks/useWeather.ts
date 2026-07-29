@@ -10,7 +10,7 @@ export const useWeather = (
     queryKey: ["weather", latitude, longitude],
     queryFn: () => getWeatherForecast(latitude!, longitude!),
     enabled: latitude !== undefined && longitude !== undefined,
-    staleTime: 1000 * 60 * 60 * 24, //la data estará activa durante 24 horas
+    staleTime: 1000 * 60 * 60 * 24
   });
   return {
     weatherQuery,

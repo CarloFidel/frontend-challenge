@@ -25,7 +25,7 @@ interface dailyForecast {
   weatherCode: number;
 }
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 4;
 
 const Forecast = ({ hourlyForecast, dailyForecast }: Props) => {
   const farenheitContext = use(TempUnityContext);

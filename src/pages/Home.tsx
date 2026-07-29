@@ -12,20 +12,20 @@ import { WiStrongWind } from "weather-icons-react";
 
 import { getToDayDate } from "../utility/getToDay";
 import { weatherCodeMap } from "../infrastructure/mapper/weatherCode.mapper";
+import { getUvDescription } from "../infrastructure/mapper/uv_index.mapper";
 
-import { useCoordCity } from "../modules/search_by_city/hooks/useCoordCity";
-import { useWeather } from "../modules/search_by_city/hooks/useWeather";
+import { TempUnityContext } from "../modules/search_by_city/context/TempUnityContext";
 
+import Loading from "../common/components/Loading";
+import CustomError from "../common/components/CustomError";
+
+import Forecast from "../modules/weather_forecast/components/Forecast";
 import AtmosParams from "../modules/search_by_city/components/AtmosParams";
 import ViewParams from "../modules/search_by_city/components/ViewParams";
 import SearchBar from "../modules/search_by_city/components/SearchBar";
-import Loading from "../common/components/Loading";
-import CustomError from "../common/components/CustomError";
-import { getUvDescription } from "../infrastructure/mapper/uv_index.mapper";
+import useForeCast from "../modules/weather_forecast/hooks/useForeCast";
 import { getWeatherIcon } from "../infrastructure/mapper/weatherCode.icons.mapper";
-import { TempUnityContext } from "../modules/search_by_city/context/TempUnityContext";
 import { convertToFahrenheit } from "../utility/convertToFahrenheit";
-import Forecast from "../modules/weather_forecast/components/Forecast";
 import { hourTransform } from "../utility/DateFormat";
 
 function Home() {
@@ -41,30 +41,14 @@ function Home() {
     setCityName(query);
   };
 
-  const { cityQuery } = useCoordCity(cityName);
-  const cityData = cityQuery.data;
-
-  const { weatherQuery } = useWeather(
-    cityData?.[0]?.latitude,
-    cityData?.[0]?.longitude,
-  );
-  const weatherData = weatherQuery.data;
-
-  const hourlyForecast =
-    weatherData?.hourly.time.slice(0, 24).map((time, index) => ({
-      time,
-      temperature: weatherData.hourly.temperature_2m[index],
-      weatherCode: weatherData.hourly.weather_code[index],
-      isDay: weatherData.hourly.is_day[index] === 1,
-    })) ?? [];
-
-  const dailyForecast =
-    weatherData?.daily.time.map((date, index) => ({
-      date,
-      tempMax: weatherData.daily.temperature_2m_max[index],
-      tempMin: weatherData.daily.temperature_2m_min[index],
-      weatherCode: weatherData.daily.weather_code[index],
-    })) ?? [];
+  const {
+    cityData,
+    weatherData,
+    dailyForecast,
+    hourlyForecast,
+    cityQuery,
+    weatherQuery,
+  } = useForeCast(cityName);
 
   return (
     <div className="flex h-full flex-col">
