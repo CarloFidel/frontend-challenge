@@ -22,7 +22,7 @@ export interface Current {
   wind_speed_10m: number;
   weather_code: number;
   surface_pressure: number;
-  isDay: boolean;
+  is_day: boolean;
 }
 
 export interface Hourly {

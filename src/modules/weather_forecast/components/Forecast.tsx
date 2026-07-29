@@ -38,8 +38,6 @@ const Forecast = ({ hourlyForecast, dailyForecast }: Props) => {
     currentPage * ITEMS_PER_PAGE,
   );
 
-  console.log(visibleForecast);
-
   return (
     <article className="flex flex-col justify-start gap-20 items-center w-1/2 text-caption text-gray-300">
       <div className="bg-background-secondary/40 border border-border-subtle/10 backdrop-blur-xl w-full rounded-2xl py-2">

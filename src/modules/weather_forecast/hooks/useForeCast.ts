@@ -10,6 +10,7 @@ const useForeCast = (cityName: string) => {
     cityData?.[0]?.longitude,
   );
   const weatherData = weatherQuery.data;
+  
   const hourlyForecast =
     weatherData?.hourly.time.slice(0, 24).map((time, index) => ({
       time,

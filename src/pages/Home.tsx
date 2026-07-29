@@ -50,6 +50,7 @@ function Home() {
     weatherQuery,
   } = useForeCast(cityName);
 
+
   return (
     <div className="flex h-full flex-col">
       <section className="flex w-full justify-between">
@@ -118,7 +119,7 @@ function Home() {
                       : "--"}
                   </p>
                   <p>
-                    {`Fles like ${
+                    {`Feels like ${
                       isFarenheit
                         ? convertToFahrenheit(
                             weatherData?.current?.temperature_2m,
@@ -132,7 +133,7 @@ function Home() {
                 <h2>Now</h2>
                 {getWeatherIcon(
                   weatherData.current.weather_code,
-                  weatherData.current.isDay,
+                  weatherData.current.is_day,
                 )}
               </div>
             </div>
