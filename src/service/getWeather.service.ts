@@ -6,13 +6,13 @@ import {
   DAILY_PARAMS,
   TIMEZONE,
   TEMPERATURE_UNIT,
+  FORECAST_DAYS,
 } from "./constants/weather.constants";
 
 export const getWeatherForecast = async (
   latitud: number,
   longitud: number,
 ): Promise<ForecastMeteoResponse> => {
-
   const { data } = await forecastMeteoUrl.get("/forecast", {
     params: {
       latitude: latitud,
@@ -22,6 +22,7 @@ export const getWeatherForecast = async (
       daily: DAILY_PARAMS,
       timezone: TIMEZONE,
       temperature_unit: TEMPERATURE_UNIT,
+      forecast_days: FORECAST_DAYS,
     },
   });
 

@@ -6,3 +6,20 @@ export const hourTransform = (date: string) => {
 
   return hour;
 };
+
+
+export const formatForecastDate = (dateString: string) => {
+  const date = new Date(dateString);
+
+  return {
+    weekday: new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+    }).format(date),
+
+    month: new Intl.DateTimeFormat("en-US", {
+      month: "long",
+    }).format(date),
+
+    day: date.getDate(),
+  };
+};
