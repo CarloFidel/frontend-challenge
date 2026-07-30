@@ -1,3 +1,4 @@
+import { use } from "react";
 import {
   BellIcon,
   GearIcon,
@@ -6,13 +7,19 @@ import {
   StarIcon,
 } from "@radix-ui/react-icons";
 import { useCustomNavigation } from "../hook/useCustomNavigation";
-import { useState } from "react";
-import { userPhoto } from "../../data/user.mock";
+import { userPhoto } from "../../modules/auth/data/user.mock";
+import { TempUnityContext } from "../../modules/search_by_city/context/TempUnityContext";
+
+import { useLocation } from "react-router";
 
 const SideBar = () => {
-  const [isC, setIsC] = useState<boolean>(true);
+  const farenheitContext = use(TempUnityContext);
+  const { isFarenheit, setIsFarenheit } = farenheitContext!;
 
-  const { menuItem, handleItemClick } = useCustomNavigation();
+  const { handleItemClick } = useCustomNavigation();
+
+  const location = useLocation();
+
   return (
     <nav className="flex flex-col justify-between items-center py-10 px-5 border border-border-subtle rounded-3xl w-1/6 bg-background-secondary">
       <div className="w-full">
@@ -26,7 +33,7 @@ const SideBar = () => {
         </h2>
         <ul className="flex flex-col gap-3 mt-10 w-full">
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "home" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/home" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("home");
             }}
@@ -36,7 +43,7 @@ const SideBar = () => {
           </li>
 
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "map" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/map" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("map");
             }}
@@ -45,7 +52,7 @@ const SideBar = () => {
             World Map
           </li>
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "favorites" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/favorites" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("favorites");
             }}
@@ -54,7 +61,7 @@ const SideBar = () => {
             Favorites
           </li>
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "alerts" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/alerts" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("alerts");
             }}
@@ -63,7 +70,7 @@ const SideBar = () => {
             Alerts
           </li>
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "settings" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/settings" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("settings");
             }}
@@ -75,17 +82,17 @@ const SideBar = () => {
       </div>
       <div className="flex">
         <button
-          className={`border border-border-subtle px-8 py-1 rounded-l-md cursor-pointer ${isC ? "bg-base-900" : "bg-none"}`}
+          className={`border border-border-subtle px-8 py-1 rounded-l-md cursor-pointer ${!isFarenheit ? "bg-base-900" : "bg-none"}`}
           onClick={() => {
-            setIsC(true);
+            setIsFarenheit(false);
           }}
         >
           ºC
         </button>
         <button
-          className={`border border-border-subtle px-8 py-1 rounded-r-md cursor-pointer ${!isC ? "bg-base-900" : "bg-none"}`}
+          className={`border border-border-subtle px-8 py-1 rounded-r-md cursor-pointer ${isFarenheit ? "bg-base-900" : "bg-none"}`}
           onClick={() => {
-            setIsC(false);
+            setIsFarenheit(true);
           }}
         >
           ºF
