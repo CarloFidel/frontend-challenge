@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getWeatherForecast } from "../../../service/getWeather.service";
 import type { ForecastMeteoResponse } from "../../../infrastructure/interfaces/forecast.meteo.response";
+import { getWeatherForecast } from "../service/getWeather.service";
 
 export const useWeather = (
   latitude?: number | undefined,

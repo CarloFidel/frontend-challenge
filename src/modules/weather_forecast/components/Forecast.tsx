@@ -3,8 +3,8 @@ import { getWeatherIcon } from "../../../infrastructure/mapper/weatherCode.icons
 import { convertToFahrenheit } from "../../../utility/convertToFahrenheit";
 import CustomPagination from "./CustomPagination";
 import { use, useState } from "react";
-import { FORECAST_DAYS } from "../../../service/constants/weather.constants";
 import { TempUnityContext } from "../../search_by_city/context/TempUnityContext";
+import { FORECAST_DAYS } from "../service/constants/weather.constants";
 
 interface Props {
   hourlyForecast: hourlyForecast[];

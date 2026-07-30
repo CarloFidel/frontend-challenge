@@ -1,5 +1,5 @@
-import type { City } from "../infrastructure/interfaces/city.interface";
-import { CityMapper } from "../infrastructure/mapper/city.mapper";
+import type { City } from "../../../infrastructure/interfaces/city.interface";
+import { CityMapper } from "../../../infrastructure/mapper/city.mapper";
 import { searchCityUrl } from "./api.config";
 
 export const getLatLongWeather = async (city: string): Promise<City[]> => {

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getLatLongWeather } from "../../../service/searchCity.service";
 import type { City } from "../../../infrastructure/interfaces/city.interface";
+import { getLatLongWeather } from "../../weather_forecast/service/searchCity.service";
 
 export const useCoordCity = (city: string) => {
   const cityQuery = useQuery<City[], Error>({

@@ -1,4 +1,4 @@
-import type { ForecastMeteoResponse } from "../infrastructure/interfaces/forecast.meteo.response";
+import type { ForecastMeteoResponse } from "../../../infrastructure/interfaces/forecast.meteo.response";
 import { forecastMeteoUrl } from "./api.config";
 import {
   CURRENT_PARAMS,
