@@ -4,13 +4,17 @@ import SearchBar from "../modules/search_by_city/components/SearchBar";
 import { FavoriteCityRow } from "../modules/favorites_cities/components/FavoritesCities";
 import { TempUnityContext } from "../modules/search_by_city/context/TempUnityContext";
 import type { City } from "../infrastructure/interfaces/city.interface";
-import favoriteCities from "../modules/favorites_cities/data/favorites_cities.mock.json";
+import { FavoriteCittyContext } from "../modules/favorites_cities/context/FavoriteCittyContext";
 
 const Favorites = () => {
   const [showInput, setShowInput] = useState<boolean>(false);
 
   const farenheitContext = use(TempUnityContext);
   const { isFarenheit } = farenheitContext!;
+
+    const FavoriteCitty = use(FavoriteCittyContext);
+    const { favor } = FavoriteCitty!;
+  
 
   return (
     <>
@@ -37,7 +41,7 @@ const Favorites = () => {
         )}
       </section>
       <section className="bg-background-secondary/30 backdrop-blur-xs rounded-2xl px-4">
-        {favoriteCities.favoriteCities.map((city: City) => (
+        {favor.map((city: City) => (
           <FavoriteCityRow
             key={city.city}
             city={city}

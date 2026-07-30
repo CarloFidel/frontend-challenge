@@ -1,3 +1,4 @@
+import { use } from "react";
 import {
   BellIcon,
   GearIcon,
@@ -6,17 +7,19 @@ import {
   StarIcon,
 } from "@radix-ui/react-icons";
 import { useCustomNavigation } from "../hook/useCustomNavigation";
-import { use } from "react";
-import { userPhoto } from "../../data/user.mock";
+import { userPhoto } from "../../modules/auth/data/user.mock";
 import { TempUnityContext } from "../../modules/search_by_city/context/TempUnityContext";
 
+import { useLocation } from "react-router";
+
 const SideBar = () => {
+  const farenheitContext = use(TempUnityContext);
+  const { isFarenheit, setIsFarenheit } = farenheitContext!;
 
-    const farenheitContext = use(TempUnityContext);
-    const {isFarenheit, setIsFarenheit} = farenheitContext!
-  
+  const { handleItemClick } = useCustomNavigation();
 
-  const { menuItem, handleItemClick } = useCustomNavigation();
+  const location = useLocation();
+
   return (
     <nav className="flex flex-col justify-between items-center py-10 px-5 border border-border-subtle rounded-3xl w-1/6 bg-background-secondary">
       <div className="w-full">
@@ -30,7 +33,7 @@ const SideBar = () => {
         </h2>
         <ul className="flex flex-col gap-3 mt-10 w-full">
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "home" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/home" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("home");
             }}
@@ -40,7 +43,7 @@ const SideBar = () => {
           </li>
 
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "map" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/map" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("map");
             }}
@@ -49,7 +52,7 @@ const SideBar = () => {
             World Map
           </li>
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "favorites" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/favorites" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("favorites");
             }}
@@ -58,7 +61,7 @@ const SideBar = () => {
             Favorites
           </li>
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "alerts" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/alerts" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("alerts");
             }}
@@ -67,7 +70,7 @@ const SideBar = () => {
             Alerts
           </li>
           <li
-            className={`flex w-full justify-start items-center gap-5 ${menuItem === "settings" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/settings" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
               handleItemClick("settings");
             }}

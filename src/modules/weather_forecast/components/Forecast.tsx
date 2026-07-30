@@ -40,7 +40,7 @@ const Forecast = ({ hourlyForecast, dailyForecast }: Props) => {
 
   return (
     <article className="flex flex-col justify-start gap-20 items-center w-1/2 text-caption text-gray-300">
-      <div className="bg-background-secondary/40 border border-border-subtle/10 backdrop-blur-xl w-full rounded-2xl py-2">
+      <div className="bg-background-secondary/40 border border-border-subtle/10 backdrop-blur-xl w-full rounded-2xl py-2 shadow-forecast">
         <div className="flex justify-between border-b border-b-border-subtle/40 px-4 pb-2">
           <h2>Hourly forecast</h2>
         </div>
@@ -60,7 +60,7 @@ const Forecast = ({ hourlyForecast, dailyForecast }: Props) => {
           ))}
         </div>
       </div>
-      <div className="bg-background-secondary/40 border border-border-subtle/10 backdrop-blur-xl w-full rounded-2xl py-2">
+      <div className="bg-background-secondary/40 border border-border-subtle/10 backdrop-blur-xl w-full rounded-2xl py-2 shadow-forecast">
         <div className="flex flex-col overflow-hidden h-full gap-8 overflow-x-auto">
           <div className="flex justify-start border-b border-b-border-subtle/40 pb-2">
             <h2 className="px-4">Dayly forecast</h2>

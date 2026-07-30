@@ -1,7 +1,8 @@
-import { StarIcon, TrashIcon } from "@radix-ui/react-icons";
+import { TrashIcon } from "@radix-ui/react-icons";
 import type { City } from "../../../infrastructure/interfaces/city.interface";
 import { convertToFahrenheit } from "../../../utility/convertToFahrenheit";
 import { useWeatherData } from "../hooks/useWeatherData";
+import { IoMdStar } from "react-icons/io";
 
 interface Props {
   city: City;
@@ -52,7 +53,7 @@ export function FavoriteCityRow({ city, isFarenheit }: Props) {
       </div>
 
       <div className="flex gap-3">
-        <StarIcon className="cursor-pointer text-yellow-400" fill="red" />
+        <IoMdStar fill="gold" />
         <TrashIcon className="cursor-pointer" />
       </div>
     </div>

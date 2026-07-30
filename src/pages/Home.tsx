@@ -4,7 +4,6 @@ import {
   GearIcon,
   OpacityIcon,
   RadiobuttonIcon,
-  StarIcon,
   SunIcon,
 } from "@radix-ui/react-icons";
 
@@ -27,10 +26,13 @@ import useForeCast from "../modules/weather_forecast/hooks/useForeCast";
 import { getWeatherIcon } from "../infrastructure/mapper/weatherCode.icons.mapper";
 import { convertToFahrenheit } from "../utility/convertToFahrenheit";
 import { hourTransform } from "../utility/DateFormat";
+import { IoIosStar, IoIosStarOutline } from "react-icons/io";
+import { FaTreeCity } from "react-icons/fa6";
+import useFavoriteCity from "../modules/favorites_cities/hooks/useFavoriteCity";
 
 function Home() {
   const [toDay] = useState(getToDayDate());
-  const [cityName, setCityName] = useState<string>("Madrid");
+  const [cityName, setCityName] = useState<string>("");
 
   const farenheitContext = use(TempUnityContext);
   const { isFarenheit } = farenheitContext!;
@@ -50,6 +52,7 @@ function Home() {
     weatherQuery,
   } = useForeCast(cityName);
 
+  const { isFavorite, handleFavoriteToggle } = useFavoriteCity(cityData!);
 
   return (
     <div className="flex h-full flex-col">
@@ -65,6 +68,15 @@ function Home() {
         <>
           <Loading />
         </>
+      )}
+
+      {cityName === "" && !cityQuery.data && (
+        <div className="flex flex-col items-center justify-center mt-20 w-full h-full">
+          <h1 className="text-center text-3xl w-full">
+            Busque una ciudad
+          </h1>
+          <FaTreeCity size={40} />
+        </div>
       )}
 
       {cityQuery.isError && (
@@ -91,14 +103,21 @@ function Home() {
                       {`${cityData && cityData[0]?.city},  
                     ${cityData && cityData[0]?.country}`}
                     </h1>
-                    <StarIcon
-                      width={20}
-                      height={20}
-                      className="text-yellow-400 mt-1 cursor-pointer"
-                      onClick={() => {
-                        console.log("clicked");
-                      }}
-                    />
+                    {!isFavorite ? (
+                      <IoIosStarOutline
+                        size={20}
+                        fill="gold"
+                        className="text-yellow-400 mt-1 cursor-pointer"
+                        onClick={handleFavoriteToggle}
+                      />
+                    ) : (
+                      <IoIosStar
+                        size={20}
+                        fill="gold"
+                        className="text-yellow-400 mt-1 cursor-pointer"
+                        onClick={handleFavoriteToggle}
+                      />
+                    )}
                   </div>
                   <p>{toDay}</p>
                 </div>
