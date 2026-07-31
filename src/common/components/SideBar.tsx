@@ -33,9 +33,9 @@ const SideBar = () => {
         </h2>
         <ul className="flex flex-col gap-3 mt-10 w-full">
           <li
-            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/home" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
+            className={`flex w-full justify-start items-center gap-5 ${location.pathname === "/" ? "bg-base-900" : "bg-none"} py-2 px-2 rounded-md cursor-pointer`}
             onClick={() => {
-              handleItemClick("home");
+              handleItemClick("");
             }}
           >
             <HomeIcon width={20} height={20} color="white" />

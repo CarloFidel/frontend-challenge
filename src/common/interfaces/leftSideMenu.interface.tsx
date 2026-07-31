@@ -1,1 +1,1 @@
-export type LeftSideMenuItem = 'home' | 'map' | 'favorites' | 'alerts' | 'settings';
+export type LeftSideMenuItem = '' | 'map' | 'favorites' | 'alerts' | 'settings';

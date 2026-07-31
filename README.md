@@ -1,6 +1,6 @@
 # 🌤️ Weather Forecast Dashboard
 
-A modern weather application built with React, TypeScript and Vite that allows users to search for cities worldwide, check current weather conditions, explore forecasts and manage favorite locations.
+I build a weather application with React, TypeScript and Vite that allows users to search for cities worldwide, check current weather conditions, explore forecasts and manage favorite locations.
 
 The project was developed following a feature-oriented architecture, separating the application by business domains to improve scalability and maintainability.
 
@@ -389,17 +389,6 @@ Provides stronger type safety, improved tooling and easier refactoring.
 ### Tailwind CSS
 
 Allows rapid UI development while keeping styles consistent and maintainable.
-
----
-
-## 🔮 Future Improvements
-
-* Persist favorite cities using Local Storage or backend storage.
-* Weather alerts integration.
-* Interactive map visualization.
-* Dark mode support.
-* Unit and integration testing.
-* Progressive Web App (PWA).
 
 ---
 
