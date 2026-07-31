@@ -11,7 +11,6 @@ declare module "weather-icons-react" {
   export const WiDaySunny: WeatherIconComponent;
   export const WiDayCloudy: WeatherIconComponent;
   export const WiDayRain: WeatherIconComponent;
-
   export const WiAlien: WeatherIconComponent;
   export const WiBarometer: WeatherIconComponent;
   export const WiCelsius: WeatherIconComponent;

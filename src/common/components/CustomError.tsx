@@ -11,7 +11,7 @@ function CustomError({
 }: ErrorMessageProps) {
   return (
     <div className="flex items-center justify-center h-full">
-      <div className="rounded-3xl bg-background-secondary/5 border border-border backdrop-blur-xs px-8 py-6">
+      <div className="rounded-3xl bg-background-secondary/20 border border-border-subtle/20 shadow-forecast backdrop-blur-xs px-8 py-6">
         <div className="flex flex-col items-center gap-4 text-center">
           <ExclamationTriangleIcon className="h-10 w-10 text-gray-400" />
 

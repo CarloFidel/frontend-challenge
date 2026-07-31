@@ -5,6 +5,7 @@ import { FavoriteCityRow } from "../modules/favorites_cities/components/Favorite
 import { TempUnityContext } from "../modules/search_by_city/context/TempUnityContext";
 import type { City } from "../infrastructure/interfaces/city.interface";
 import { FavoriteCittyContext } from "../modules/favorites_cities/context/FavoriteCittyContext";
+import CustomError from "../common/components/CustomError";
 
 const Favorites = () => {
   const [showInput, setShowInput] = useState<boolean>(false);
@@ -12,9 +13,13 @@ const Favorites = () => {
   const farenheitContext = use(TempUnityContext);
   const { isFarenheit } = farenheitContext!;
 
-    const FavoriteCitty = use(FavoriteCittyContext);
-    const { favor } = FavoriteCitty!;
-  
+  const FavoriteCitty = use(FavoriteCittyContext);
+  const { favor, setFavor } = FavoriteCitty!;
+
+  const handleDeleteFavoreteItem = (city: string) => {
+    const newFavore = favor.filter((item) => item.city !== city);
+    setFavor(newFavore);
+  };
 
   return (
     <>
@@ -31,6 +36,7 @@ const Favorites = () => {
           Add favorite
         </button>
       </section>
+
       <section className="my-10">
         {showInput && (
           <SearchBar
@@ -40,12 +46,20 @@ const Favorites = () => {
           />
         )}
       </section>
+            {favor.length === 0 && (
+        <CustomError
+          title="No hay favoritos para mostrar"
+          message="Agregue una ciudad a favoritos"
+        />
+      )}
+
       <section className="bg-background-secondary/30 backdrop-blur-xs rounded-2xl px-4">
         {favor.map((city: City) => (
           <FavoriteCityRow
             key={city.city}
             city={city}
             isFarenheit={isFarenheit}
+            handleDeleteFavoreteItem={handleDeleteFavoreteItem}
           />
         ))}
       </section>

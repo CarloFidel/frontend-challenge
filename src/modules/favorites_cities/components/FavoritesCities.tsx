@@ -7,9 +7,15 @@ import { IoMdStar } from "react-icons/io";
 interface Props {
   city: City;
   isFarenheit: boolean;
+
+  handleDeleteFavoreteItem: (city: string) => void;
 }
 
-export function FavoriteCityRow({ city, isFarenheit }: Props) {
+export function FavoriteCityRow({
+  city,
+  isFarenheit,
+  handleDeleteFavoreteItem,
+}: Props) {
   const weather = useWeatherData(city.latitude, city.longitude);
 
   if (weather.isLoading) {
@@ -54,7 +60,10 @@ export function FavoriteCityRow({ city, isFarenheit }: Props) {
 
       <div className="flex gap-3">
         <IoMdStar fill="gold" />
-        <TrashIcon className="cursor-pointer" />
+        <TrashIcon
+          className="cursor-pointer"
+          onClick={() => handleDeleteFavoreteItem(city.city)}
+        />
       </div>
     </div>
   );
