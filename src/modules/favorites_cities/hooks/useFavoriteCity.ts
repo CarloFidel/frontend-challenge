@@ -3,6 +3,7 @@ import { FavoriteCittyContext } from "../context/FavoriteCittyContext";
 import type { City } from "../../../infrastructure/interfaces/city.interface";
 
 const useFavoriteCity = (cityData: City[]) => {
+  
   const FavoriteCitty = use(FavoriteCittyContext);
   const { favor, setFavor } = FavoriteCitty!;
 

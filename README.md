@@ -400,7 +400,6 @@ Allows rapid UI development while keeping styles consistent and maintainable.
 * Dark mode support.
 * Unit and integration testing.
 * Progressive Web App (PWA).
-* Internationalization (i18n).
 
 ---
 
